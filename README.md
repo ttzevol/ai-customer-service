@@ -59,25 +59,53 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 Visit http://localhost:8000/docs for API documentation.
 
-## 📦 Pricing
+## 📚 Documentation
 
-| Plan | Price | Includes |
-|------|-------|----------|
-| Free | $0 | 100 calls/month |
-| Pro | $99/month | Unlimited + Support |
-| Enterprise | $299/month | Unlimited + Custom |
+| Document | Description |
+|----------|-------------|
+| [README_CN.md](./README_CN.md) | 中文项目介绍 |
+| [docs/API.md](./docs/API.md) | API 接口文档 |
+| [docs/USER_GUIDE.md](./docs/USER_GUIDE.md) | 使用指南 |
+| [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md) | 生产环境部署 |
+| [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) | 系统架构设计 |
+| [docs/CONFIGURATION.md](./docs/CONFIGURATION.md) | 配置完整指南 |
+| [docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md) | 贡献指南 |
+| [docs/SOCIAL_PROMOTION.md](./docs/SOCIAL_PROMOTION.md) | 社交媒体推广文案 |
 
-## 📄 License
+## 🏗️ Project Structure
 
-MIT License - Free for commercial use!
-
-## ⭐ Star Us!
-
-If this project helps you, please give us a star! 🌟
-
-```bash
-gh repo star ttzevol/ai-customer-service
 ```
+ai-customer-service/
+├── app/                      # 核心应用代码
+│   ├── api/                  # FastAPI 路由
+│   │   ├── chat.py          # 对话接口
+│   │   ├── knowledge.py     # 知识库接口
+│   │   └── health.py        # 健康检查
+│   ├── core/                # 配置管理
+│   ├── models/              # 数据模型
+│   ├── services/            # 业务逻辑
+│   │   ├── rag_service.py   # RAG 检索服务
+│   │   ├── llm_service.py   # LLM 调用封装
+│   │   └── chat_service.py  # 对话服务
+│   ├── graph/               # LangGraph 工作流
+│   └── knowledge/           # 知识库管理
+├── tests/                    # 测试用例
+├── scripts/                  # 部署脚本
+├── docs/                     # 完整文档
+├── docker-compose.yml        # Docker 编排
+├── requirements.txt          # Python 依赖
+└── README.md                 # 项目说明
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing`)
+5. Open a Pull Request
+
+See [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details.
 
 ---
 
