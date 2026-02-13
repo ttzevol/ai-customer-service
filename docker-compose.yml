@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Milvus Vector Database
+  milvus:
+    image: milvusdb/milvus:v2.3.4
+    container_name: milvus-standalone
+    command: ["milvus", "standalone", "-t", "4"]
+    tty: true
+    volumes:
+      - ${MILVUS_DATA_PATH:-./data/milvus}:/var/lib/milvus
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+      - "19121:19121"
+    networks:
+      - ai-network
+
+  # Application
+  app:
+    build: .
+    container_name: ai-customer-service
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./:/app
+      - ./data:/app/data
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - milvus
+    networks:
+      - ai-network
+    environment:
+      - MILVUS_HOST=milvus
+      - DATABASE_URL=sqlite+aiosqlite:///./data/app.db
+
+  # Nginx (optional, for production)
+  nginx:
+    image: nginx:alpine
+    container_name: ai-customer-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    networks:
+      - ai-network
+
+networks:
+  ai-network:
+    driver: bridge
