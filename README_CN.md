@@ -7,19 +7,16 @@
 [![GitHub Stars](https://img.shields.io/github/stars/ttzevol/ai-customer-service?style=social)](https://github.com/ttzevol/ai-customer-service/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/ttzevol/ai-customer-service?style=social)](https://github.com/ttzevol/ai-customer-service/network)
 [![Contributors](https://img.shields.io/github/contributors/ttzevol/ai-customer-service)](https://github.com/ttzevol/ai-customer-service/graphs/contributors)
-[![CI/CD](https://img.shields.io/github/actions/workflow/status/ttzevol/ai-customer-service/ci.yml)](https://github.com/ttzevol/ai-customer-service/actions)
-[![Coverage](https://img.shields.io/codecov/c/github/ttzevol/ai-customer-service)](https://codecov.io/gh/ttzevol/ai-customer-service)
 
 > 🇨🇳 基于 LangGraph + RAG 的企业级智能客服机器人，支持知识库管理和多轮对话 🚀
-> 
+>
 > English: [README_EN.md](./README_EN.md)
 
-## ⭐ 为什么选择我们？
+## ⭐ 项目特点
 
 | 特性 | 传统客服 | 🤖 AI 客服 |
 |------|---------|-----------|
 | 7×24小时服务 | ❌ 需要轮班 | ✅ 自动响应 |
-| 成本 | ¥5000+/月 | ¥99/月 起 |
 | 响应速度 | 1-5分钟 | < 1秒 |
 | 并发能力 | 有限 | 无限扩展 |
 | 学习能力 | 需培训 | 自学习 |
@@ -95,20 +92,12 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 # 发送对话
 curl -X POST "http://localhost:8000/api/v1/chat" \
   -H "Content-Type: application/json" \
-  -d '{"message": "你们的定价是怎样的？", "session_id": "user_123"}'
+  -d '{"message": "你们有哪些功能？", "session_id": "user_123"}'
 
 # 上传知识库
 curl -X POST "http://localhost:8000/api/v1/knowledge/upload" \
   -F "file=@manual.pdf"
 ```
-
-## 💰 定价方案
-
-| 方案 | 价格 | 包含 |
-|------|------|------|
-| 🆓 Free | ¥0 | 100次/月，体验版 |
-| 💼 Pro | ¥99/月 | 无限调用，基础支持 |
-| 🏢 Enterprise | ¥299/月 | 无限调用，定制服务 |
 
 ## 📈 发展路线
 
