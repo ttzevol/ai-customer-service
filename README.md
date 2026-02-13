@@ -1,181 +1,86 @@
 # 🤖 AI Customer Service Bot
 
+> **🇨🇳 中文介绍请查看 [README_CN.md](./README_CN.md)**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109-green.svg)](https://fastapi.tiangolo.com/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-0.1-purple.svg)](https://langchain-ai.github.io/langgraph/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 [![GitHub Stars](https://img.shields.io/github/stars/ttzevol/ai-customer-service?style=social)](https://github.com/ttzevol/ai-customer-service/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/ttzevol/ai-customer-service?style=social)](https://github.com/ttzevol/ai-customer-service/network)
+[![Contributors](https://img.shields.io/github/contributors/ttzevol/ai-customer-service)](https://github.com/ttzevol/ai-customer-service/graphs/contributors)
+[![CI/CD](https://img.shields.io/github/actions/workflow/status/ttzevol/ai-customer-service/ci.yml)](https://github.com/ttzevol/ai-customer-service/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/ttzevol/ai-customer-service)](https://codecov.io/gh/ttzevol/ai-customer-service)
 
-> 基于 LangGraph + RAG 的企业级智能客服机器人，支持知识库管理和多轮对话 🚀
+> Enterprise-grade AI Customer Service Bot with RAG and LangGraph 🚀
 
-## ✨ 特性
+## ✨ Features
 
-- 🧠 **智能问答** - 基于 RAG 的向量检索，精准匹配知识库
-- 🔄 **多轮对话** - LangGraph 工作流编排，上下文理解能力强
-- 📚 **知识库管理** - 支持 PDF/Word/TXT 文档自动解析
-- ⚡ **高性能** - FastAPI + 异步处理，响应快速
-- 🐳 **一键部署** - Docker Compose 容器化，开箱即用
-- 🔌 **完整 API** - RESTful 接口，易于集成
+- 🧠 **Smart Q&A** - RAG-based vector retrieval with knowledge base
+- 🔄 **Multi-turn Dialogue** - LangGraph workflow orchestration
+- 📚 **Knowledge Management** - PDF/Word/TXT document processing
+- ⚡ **High Performance** - FastAPI with async support
+- 🐳 **Docker Ready** - Containerized deployment
+- 🔌 **Complete API** - RESTful interfaces for easy integration
 
-## 🛠 技术栈
+## 🛠 Tech Stack
 
 <div align="center">
 
-| 类别 | 技术 |
-|------|------|
-| 后端框架 | FastAPI |
-| AI 框架 | LangChain + LangGraph |
-| 向量数据库 | Milvus / Chroma |
+| Category | Technology |
+|----------|------------|
+| Backend | FastAPI |
+| AI Framework | LangChain + LangGraph |
+| Vector DB | Milvus / Chroma |
 | LLM | OpenAI GPT-4 / Claude / Gemini |
-| 数据库 | SQLite / PostgreSQL |
-| 部署 | Docker / Docker Compose |
+| Deployment | Docker / Docker Compose |
 
 </div>
 
-## 📦 快速开始
+## 🚀 Quick Start
 
-### 1. 克隆项目
+### Docker (Recommended)
 
 ```bash
 git clone https://github.com/ttzevol/ai-customer-service.git
 cd ai-customer-service
+docker-compose up -d --build
 ```
 
-### 2. 安装依赖
+### Local Development
 
 ```bash
-# 创建虚拟环境
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# 或
-.\venv\Scripts\activate  # Windows
-
-# 安装依赖
+source venv/bin/activate
 pip install -r requirements.txt
-```
-
-### 3. 配置环境
-
-```bash
 cp .env.example .env
-# 编辑 .env 文件，填入你的配置
-```
-
-### 4. 启动服务
-
-```bash
-# 启动向量数据库（可选）
-docker-compose up -d milvus
-
-# 启动应用
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-访问 http://localhost:8000/docs 查看 API 文档。
+Visit http://localhost:8000/docs for API documentation.
 
-## 🐳 Docker 部署
+## 📦 Pricing
 
-```bash
-# 一键启动所有服务
-docker-compose up -d --build
+| Plan | Price | Includes |
+|------|-------|----------|
+| Free | $0 | 100 calls/month |
+| Pro | $99/month | Unlimited + Support |
+| Enterprise | $299/month | Unlimited + Custom |
 
-# 查看日志
-docker-compose logs -f
+## 📄 License
 
-# 停止服务
-docker-compose down
-```
+MIT License - Free for commercial use!
 
-## 📡 API 使用示例
+## ⭐ Star Us!
 
-### 发送对话消息
-
-```bash
-curl -X POST "http://localhost:8000/api/v1/chat" \
-  -H "Content-Type: application/json" \
-  -d '{"message": "你们的定价是怎样的？", "session_id": "user_123"}'
-```
-
-### 上传知识库
+If this project helps you, please give us a star! 🌟
 
 ```bash
-curl -X POST "http://localhost:8000/api/v1/knowledge/upload" \
-  -F "file=@manual.pdf"
+gh repo star ttzevol/ai-customer-service
 ```
-
-## 📁 项目结构
-
-```
-ai-customer-service/
-├── app/
-│   ├── api/              # FastAPI 路由
-│   │   ├── chat.py      # 对话接口
-│   │   ├── knowledge.py  # 知识库接口
-│   │   └── health.py     # 健康检查
-│   ├── core/            # 配置管理
-│   ├── models/          # 数据模型
-│   ├── services/        # 业务逻辑
-│   │   ├── rag_service.py    # RAG 检索服务
-│   │   ├── llm_service.py    # LLM 调用封装
-│   │   └── chat_service.py   # 对话服务
-│   ├── graph/           # LangGraph 工作流
-│   └── knowledge/       # 知识库管理
-├── tests/               # 测试用例
-├── scripts/             # 部署脚本
-├── docs/                # 文档
-├── docker-compose.yml   # Docker 编排
-├── requirements.txt     # Python 依赖
-└── README.md            # 项目说明
-```
-
-## 💰 商业模式
-
-| 方案 | 价格 | 包含 |
-|------|------|------|
-| Free | ¥0 | 100次/月，体验版 |
-| Pro | ¥99/月 | 无限调用，基础支持 |
-| Enterprise | ¥299/月 | 无限调用，定制服务 |
-
-## 📈 路线图
-
-- [x] MVP 版本发布
-- [ ] LangGraph 工作流集成
-- [ ] 多轮对话支持
-- [ ] 用户管理系统
-- [ ] Web 管理后台
-- [ ] 定价页面
-- [ ] 生产环境部署
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-1. Fork 本仓库
-2. 创建分支 (`git checkout -b feature/amazing-feature`)
-3. 提交改动 (`git commit -m 'Add amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 打开 Pull Request
-
-## 📄 许可证
-
-本项目采用 MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。
-
-## ⭐ 如果对你有帮助，请 star 支持！
-
-<div align="center">
-
-[![Star History Chart](https://api.star-history.com/svg?repos=ttzevol/ai-customer-service&type=Date)](https://star-history.com/#ttzevol/ai-customer-service&Date)
-
-</div>
-
-## 📞 联系
-
-- GitHub Issues: [https://github.com/ttzevol/ai-customer-service/issues](https://github.com/ttzevol/ai-customer-service/issues)
-- 作者: [@ttzevol](https://github.com/ttzevol)
 
 ---
 
 <p align="center">
-  用 ❤️ 构建
+  Made with ❤️
 </p>
